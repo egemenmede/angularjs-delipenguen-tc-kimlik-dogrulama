@@ -35,6 +35,7 @@ angular.module('app', [])
         }
 
         function tenthValue(_val) {
+            var _returnValue;
             var _tckn = _val.substr(0, 9);
             var _map = Array.prototype.map;
             var _stringToArray = _map.call(_tckn, function (x) {
@@ -49,7 +50,12 @@ angular.module('app', [])
                 } else { // 2,4,6,8
                     _evenNumberTotal = parseInt(_evenNumberTotal) + parseInt(currentValue);
                 }
-                return ((_oddNumberTotal * 7) - _evenNumberTotal) % 10;
+                if ((((_oddNumberTotal * 7) - _evenNumberTotal) % 10) < 0){
+                	_returnValue = (((_oddNumberTotal * 7) - _evenNumberTotal) % 10) + 10;
+                }else{
+                	_returnValue = ((_oddNumberTotal * 7) - _evenNumberTotal) % 10;
+                }
+                return _returnValue;
             }, 0);
             return _tenthValue;
         }
